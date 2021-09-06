@@ -3,6 +3,15 @@ const populationSpan = document.querySelector('#populationDiv > #populationSpan'
 const confirmedSpan = document.querySelector('#confirmedDiv > #confirmedSpan');
 const deathSpan = document.querySelector('#deathDiv > #deathSpan');
 
+let map;
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+    });
+}
+
 
 
 // Extract country name
@@ -48,7 +57,7 @@ const countryStats = async (userSelectCountry) => {
 
 
 // Show countries in the "select slider"
-extractCountries()
+extractCountries();
 
 // select a country and show its statistics
 slctRegion.addEventListener('change', async (evt) => {

@@ -7,38 +7,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    <link rel="stylesheet" href="covid.css">
+
     <title>Covid 19</title>
 </head>
 
 <body>
     <section>
-        <nav></nav>
-        <div id="slctDiv">
-            <label for="slctRegion">Select a Country</label>
-            <select name="slctRegion" id="slctRegion">
-                <option value="">None</option>
-            </select>
-        </div>
-        <div id="mapDiv">
 
+        <nav id="navBar">
+            <a href="">Home</a>
+            <a href="">API Source</a>
+            <a href="">Contact</a>
+            <a href="">About</a>
+        </nav>
+
+        <div id="skeletonDiv">
+            <div id="slctDiv">
+                <label for="slctRegion">Select a Country</label>
+
+                <select name="slctRegion" id="slctRegion">
+                    <option value="">None</option>
+                </select>
+
+            </div>
+
+            <div id="mapDiv">
+            </div>
+
+            <div id="statsDiv">
+                <div id="populationDiv">
+                    <span>Population:</span>
+                    <span id="populationSpan"></span>
+                </div>
+                <div id="confirmedDiv">
+                    <span>Confirmed Cases: </span>
+                    <span id="confirmedSpan"></span>
+                </div>
+                <div id="deathDiv">
+                    <span>Death Cases: </span>
+                    <span id="deathSpan"></span>
+                </div>
+            </div>
         </div>
-        <div id="statsDiv">
-            <div id="populationDiv">
-                <span>Population:</span>
-                <span id="populationSpan"></span>
-            </div>
-            <div id="confirmedDiv">
-                <span>Confirmed Cases: </span>
-                <span id="confirmedSpan"></span>
-            </div>
-            <div id="deathDiv">
-                <span>Death Cases: </span>
-                <span id="deathSpan"></span>
-            </div>
-        </div>
+
+        <div id="map"></div>
+
+
+
     </section>
 
-
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCN7iFYYh0Ral5_7cS1OSddFYMvv53Av2o&callback=initMap&libraries=&v=weekly"
+        async></script>
     <script src="app.js"></script>
 </body>
 
