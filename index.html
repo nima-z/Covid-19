@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <title>Covid 19</title>
+</head>
+
+<body>
+    <section>
+        <nav></nav>
+        <div id="slctDiv">
+            <label for="slctRegion">Select a Country</label>
+            <select name="slctRegion" id="slctRegion">
+                <option value="">None</option>
+            </select>
+        </div>
+        <div id="mapDiv">
+
+        </div>
+        <div id="statsDiv">
+            <div id="populationDiv">
+                <span>Population:</span>
+                <span id="populationSpan"></span>
+            </div>
+            <div id="confirmedDiv">
+                <span>Confirmed Cases: </span>
+                <span id="confirmedSpan"></span>
+            </div>
+            <div id="deathDiv">
+                <span>Death Cases: </span>
+                <span id="deathSpan"></span>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="app.js"></script>
+</body>
+
+</html>
