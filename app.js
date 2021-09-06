@@ -2,6 +2,7 @@ const slctRegion = document.querySelector('#slctRegion');
 const populationSpan = document.querySelector('#populationDiv > #populationSpan');
 const confirmedSpan = document.querySelector('#confirmedDiv > #confirmedSpan');
 const deathSpan = document.querySelector('#deathDiv > #deathSpan');
+const frame = document.querySelector('iframe');
 
 // let map;
 
@@ -53,6 +54,8 @@ const countryStats = async (userSelectCountry) => {
     populationSpan.textContent = population
     confirmedSpan.textContent = confirmedCases
     deathSpan.textContent = deathCases
+    frame.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyCN7iFYYh0Ral5_7cS1OSddFYMvv53Av2o
+    &q=${userSelectCountry}`
 }
 
 
