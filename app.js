@@ -3,16 +3,7 @@ const populationSpan = document.querySelector('#populationDiv > #populationSpan'
 const confirmedSpan = document.querySelector('#confirmedDiv > #confirmedSpan');
 const deathSpan = document.querySelector('#deathDiv > #deathSpan');
 const frame = document.querySelector('iframe');
-
-// let map;
-
-// function initMap() {
-//     map = new google.maps.Map(document.getElementById("map"), {
-//         center: { lat: -34.397, lng: 150.644 },
-//         zoom: 8,
-//     });
-// }
-
+const myKey = config.Api_key;
 
 
 // Extract country name
@@ -24,7 +15,9 @@ const extractCountries = async () => {
             const option = document.createElement('option');
             option.append(country);
             option.value = country;
-            slctRegion.appendChild(option)
+            slctRegion.appendChild(option);
+            frame.src = `https://www.google.com/maps/embed/v1/place?key=${myKey}
+    &q=France&zoom=3`
         }
     }
     catch {
@@ -54,13 +47,13 @@ const countryStats = async (userSelectCountry) => {
     populationSpan.textContent = population
     confirmedSpan.textContent = confirmedCases
     deathSpan.textContent = deathCases
-    frame.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyCN7iFYYh0Ral5_7cS1OSddFYMvv53Av2o
+    frame.src = `https://www.google.com/maps/embed/v1/place?key=${myKey}
     &q=${userSelectCountry}`
 }
 
 
 // Show countries in the "select slider"
-extractCountries();
+extractCountries()
 
 // select a country and show its statistics
 slctRegion.addEventListener('change', async (evt) => {
