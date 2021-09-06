@@ -3,14 +3,14 @@ const populationSpan = document.querySelector('#populationDiv > #populationSpan'
 const confirmedSpan = document.querySelector('#confirmedDiv > #confirmedSpan');
 const deathSpan = document.querySelector('#deathDiv > #deathSpan');
 
-let map;
+// let map;
 
-function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
-    });
-}
+// function initMap() {
+//     map = new google.maps.Map(document.getElementById("map"), {
+//         center: { lat: -34.397, lng: 150.644 },
+//         zoom: 8,
+//     });
+// }
 
 
 
