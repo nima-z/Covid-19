@@ -15,6 +15,7 @@ const extractCountries = async () => {
             const option = document.createElement('option');
             option.append(country);
             option.value = country;
+            option.classList.add = "option"
             slctRegion.appendChild(option);
             frame.src = `https://www.google.com/maps/embed/v1/place?key=${myKey}
     &q=France&zoom=3`
