@@ -73,6 +73,8 @@ iframe {
 	filter: brightness(90%);
 }
 
+
+
 .form-select {
 	height:90%;
 	cursor:pointer;
@@ -86,6 +88,9 @@ iframe {
 	box-shadow: 0 0 10px 1px #001218;
 }
 
+.form-select:focus-visible {
+	outline: none;
+}
 .form-select::-webkit-scrollbar {
 	background-color: #001218;
 	border-radius: 0 10px 10px 0;
