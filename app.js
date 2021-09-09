@@ -1,8 +1,10 @@
 const slctRegion = document.querySelector('#slctRegion');
-const slctTime = document.querySelector('#slctTime');
+// const slctTime = document.querySelector('#slctTime');
 const populationSpan = document.querySelector('#populationDiv > #populationSpan');
 const confirmedSpan = document.querySelector('#confirmedDiv > #confirmedSpan');
 const deathSpan = document.querySelector('#deathDiv > #deathSpan');
+const areaSpan = document.querySelector('#areaDiv > #areaSpan');
+const lifeExpectSpan = document.querySelector('#lifeExpectDiv > #lifeExpectSpan');
 const frame = document.querySelector('iframe');
 const myKey = config.Api_key;
 
@@ -21,6 +23,16 @@ const extractCountries = async () => {
             slctRegion.appendChild(option);
             frame.src = `https://www.google.com/maps/embed/v1/place?key=${myKey}&q=Iran&zoom=3`
         }
+        const resD = await axios.get('https://covid-api.mmediagroup.fr/v1/history?country=Germany&status=deaths');
+        const daysAPI = resD.data.All.dates;
+        const daysList = Object.keys(daysAPI);
+        const dates = [];
+        for (let i = 0; i <= 365; i += 30) {
+            dates.push(daysList[i]);
+        }
+        myChart.data.labels = dates.reverse();
+        myChart.update();
+
     }
     catch {
         console.log('Error on extracting countries name')
@@ -30,13 +42,11 @@ const extractCountries = async () => {
 // "name" from "countryStats" for executing as query (country name)
 const chooseCountry = async (name) => {
     try {
-        const config = { params: { country: name } }
-        const resD = await axios.get(`https://covid-api.mmediagroup.fr/v1/history${config}&status=deaths`)
-        const deathData = resD.data.All;
-        const resC = await axios.get(`https://covid-api.mmediagroup.fr/v1/history${config}&status=confirmed`)
-        const confirmedData = resC.data.All;
-
-        return [deathData, confirmedData]
+        const resD = await axios.get(`https://covid-api.mmediagroup.fr/v1/history?country=${name}&status=deaths`)
+        const history = resD.data.All;
+        const resC = await axios.get(`https://covid-api.mmediagroup.fr/v1/cases?country=${name}`)
+        const cases = resC.data.All;
+        return [history, cases]
     }
     catch {
         console.log("Error on loading statistics of chosen country")
@@ -46,58 +56,47 @@ const chooseCountry = async (name) => {
 //  "userSelectCountry" from "select listener" for passing throw "choose country"
 const countryStats = async (userSelectCountry) => {
     const stats = await chooseCountry(userSelectCountry);
-    const deathStat = stats[0];
-    const confirmedStat = stats[1];
+    const deathData = stats[0].dates;
+    const confirmedTotal = stats[1].confirmed;
+    const deathTotal = stats[1].deaths;
+    const population = stats[1].population;
+    const area = stats[1].sq_km_area;
+    const lifeExpextancy = stats[1].life_expectancy;
 
-    const date = dateRow.toISOString().slice(0, 10);
 
 
-    const population = stat.population;
+    const statList = Object.values(deathData);
 
+    const deathStat = [];
 
-    updateChart(confirmed, deaths);
+    for (let i = 0; i <= 365; i += 30) {
+        let stat = statList[i] - statList[i + 1]
+        deathStat.push(stat);
+    }
+
+    updateChartData(deathStat);
     populationSpan.textContent = population;
-    confirmedSpan.textContent = confirmed;
-    deathSpan.textContent = deaths;
+    confirmedSpan.textContent = confirmedTotal;
+    deathSpan.textContent = deathTotal;
+    areaSpan.textContent = area;
+    lifeExpectSpan.textContent = lifeExpextancy;
+
     frame.src = `https://www.google.com/maps/embed/v1/place?key=${myKey}
     &q=${userSelectCountry}`
 }
 
-const updateChartData = async (c, d) => {
-    myChart.data.datasets[0].data = [c, d];
+const updateChartData = async (inputDeath) => {
+    myChart.data.datasets[0].data = inputDeath.reverse();
     myChart.update()
 }
-
-const updateChartTime = async (period) => {
-    const resC = await axios.get('https://covid-api.mmediagroup.fr/v1/history?country=Germany&status=confirmed');
-    const daysAPI = resC.data.All.dates;
-    const daysList = Object.keys(daysAPI);
-    const dates = [];
-    for (let i = 0; i <= period; i++) {
-        dates.append(daysList[i]);
-    }
-    myChart.data.labels = ["rock", "roll"]
-    myChart.update();
-}
-
 
 // Show countries in the "select slider"
 extractCountries()
 
 
-
-
-slctTime.addEventListener('change', async (evt) => {
-    evt.preventDefault();
-    const userTime = slctTime.value;
-    await updateChartTime(userTime);
-})
 // select a country and show its statistics
 slctRegion.addEventListener('change', async (evt) => {
     evt.preventDefault();
     const userSelectCountry = slctRegion.value;
     await countryStats(userSelectCountry);
 })
-
-
-

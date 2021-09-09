@@ -5,14 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
-    </style>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="style.css">
-
     <title>Covid 19</title>
 </head>
 
@@ -31,11 +24,6 @@
 
             <div id="mapDiv">
                 <iframe style="border:0" loading="lazy" allowfullscreen src=""></iframe>
-            </div>
-
-            <div id="statsDiv">
-
-                <canvas id="chart" width="400" height="400"></canvas>
 
                 <div id="populationDiv">
                     <span>Population:</span>
@@ -43,30 +31,41 @@
                 </div>
 
                 <div id="confirmedDiv">
-                    <span>Confirmed Cases: </span>
+                    <span>Total Confirmed Cases: </span>
                     <span id="confirmedSpan"></span>
                 </div>
 
                 <div id="deathDiv">
-                    <span>Death Cases: </span>
+                    <span>Total Death Cases: </span>
                     <span id="deathSpan"></span>
                 </div>
+                <div id="areaDiv">
+                    <span>Area (sq_km): </span>
+                    <span id="areaSpan"></span>
+                </div>
+                <div id="lifeExpectDiv">
+                    <span>Life Expectancy: </span>
+                    <span id="lifeExpectSpan"></span>
+                </div>
+            </div>
 
+            <div id="statsDiv">
+                <canvas id="chart" width="400" height="400"></canvas>
             </div>
 
             <div id="slctDiv">
-                <select class="form-select" id="slctRegion" multiple aria-label="multiple select example"></select>
-                <select name="slctTime" id="slctTime" multiple="multiple">
-                    <option value="30">1 month</option>
-                    <option value="90">3 months</option>
-                    <option value="180">6 months</option>
-                    <option value="365">1 year</option>
-                </select>
+                <select class="form-select" id="slctRegion" multiple="multiple"></select>
             </div>
 
         </div>
     </div>
 
+    <!-- Scripts Here -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="chart.js"></script>
     <script src="config.js"></script>
     <script src="app.js"></script>
