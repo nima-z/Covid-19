@@ -23,16 +23,7 @@ const extractCountries = async () => {
             slctRegion.appendChild(option);
             frame.src = `https://www.google.com/maps/embed/v1/place?key=${myKey}&q=Iran&zoom=3`
         }
-        const resD = await axios.get('https://covid-api.mmediagroup.fr/v1/history?country=Germany&status=deaths');
-        const daysAPI = resD.data.All.dates;
-        const daysList = Object.keys(daysAPI);
-        const dates = [];
-        for (let i = 0; i <= 365; i += 30) {
-            dates.push(daysList[i]);
-        }
-        myChart.data.labels = dates.reverse();
-        myChart.update();
-
+        dateForChart();
     }
     catch {
         console.log('Error on extracting countries name')
@@ -88,6 +79,20 @@ const countryStats = async (userSelectCountry) => {
 const updateChartData = async (inputDeath) => {
     myChart.data.datasets[0].data = inputDeath.reverse();
     myChart.update()
+}
+
+const dateForChart = function () {
+    const date = new Date();
+    const thisMonth = date.getMonth();
+    const monthsList = [];
+    for (let i = 0; i <= 12; i++) {
+        const num = thisMonth - i;
+        date.setMonth(num);
+        const cleanDate = date.toISOString().slice(0, 10)
+        monthsList.push(cleanDate)
+    }
+    myChart.data.labels = monthsList.reverse();
+    myChart.update();
 }
 
 // Show countries in the "select slider"

@@ -2,10 +2,6 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-* {
-	box-sizing: border-box;
-}
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -31,9 +27,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
-	line-height: 1;
-}
+
 ol, ul {
 	list-style: none;
 }
@@ -50,43 +44,65 @@ table {
 	border-spacing: 0;
 }
 
-html, body {
+/* User Setting */
+* {
+	box-sizing: border-box;
+}
+
+body {
     height: 100%;
     margin: 0.5rem;
-    padding: 0;
-	background-color: #001218
-  }
-a {
-	color:blanchedalmond
+    padding: 0.2rem;
+	background-color: #001218;
+	line-height: 1rem;
 }
+
+
+#navBar{
+	font-family: 'Oswald', sans-serif;
+	margin-left: 2rem;
+}
+
+a{
+	color:blanchedalmond;
+	margin:0.4rem;
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+	transition:0.5s;
+}
+
+a:hover{
+	border-color: blanchedalmond;
+}
+
 #mainDiv {
 	display:flex;
 	justify-content: space-between;
-	background-color: #33415C;
-	min-height: 35rem;
-	border-radius: 15px;
-	margin-top: 1rem;
-	padding:1rem
+	flex-wrap: wrap;
+	background-color: #2c4066;
+	min-height: 37rem;
+	margin: 1rem 2rem 0 2rem;
+	padding:1rem;
+	border-radius: 3px;
 }
 
 iframe {
-	width:400px;
-	height:400px;
-	border-radius: 15px;
+	width:20rem;
+	height:20rem;
+	border-radius: 3px;
 	filter: brightness(90%);
+	box-shadow: 0px 0px 10px 1px #001218;
 }
 
-
-
 .form-select {
-	height:90%;
+	height:98%;
 	cursor:pointer;
-	background-color: #4d576b;
-	border-radius: 15px;
+	background-color: #001218c9;
+	border-radius: 5px;
 	font-family: 'Oswald', sans-serif;
 	font-size: 18px; 
 	border: none;
-	color:rgb(31, 31, 36);
+	color:#d3d9e498;
 	padding: 0 0;
 	box-shadow: 0 0 10px 1px #001218;
 }
@@ -100,8 +116,8 @@ iframe {
 
 }
 .form-select::-webkit-scrollbar-thumb {
-	background-color: #4d576b;
-	border-radius: 30px;
+	background-color: rgba(161, 19, 31, 0.835);
+	border-radius: 3px;
 }
 
 option {
@@ -111,28 +127,32 @@ option {
 }
 
 option:hover {
-	background: linear-gradient(rgb(66, 66, 83),rgba(112, 112, 122, 0.377));
-	border-radius: 10px;
+	background: linear-gradient(rgba(248, 126, 119, 0.363),rgba(248, 126, 119, 0.363));
+	border-radius: 3px;
 }
-option:checked,option:active,option:focus{
-	background: linear-gradient(rgb(33, 33, 56),rgba(33, 28, 88, 0.452));
-	border-radius: 10px;
+option:checked,option:active,option:focus,option:focus-visible,option:focus-within{
+	background: linear-gradient(rgb(126, 54, 60),rgb(176, 63, 74));
+	border-radius: 3px;
 }
 
 #mapDiv {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-
 }
 #statsDiv {
-	color:rgb(24, 21, 21);
+	color:#d3d9e498;
+	font-size: 1.1rem;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
-
+	margin: 2rem 0 0 0.5rem;
+	font-family:  'Oswald', sans-serif;
 }
 
-canvas {
-	color: black
+#statsDiv div {
+	margin: 0.7rem 0;
 }
+
+.textStat {
+	color: rgb(176, 63, 74);
+}
+

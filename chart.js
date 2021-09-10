@@ -1,4 +1,6 @@
-// const oldData = [10, 30, 50]
+Chart.defaults.font.family = 'Oswald', 'sans serif';
+Chart.defaults.color = '#d3d9e498';
+
 const chart = document.querySelector('#chart').getContext('2d');
 const myChart = new Chart(chart, {
     type: 'bar',
