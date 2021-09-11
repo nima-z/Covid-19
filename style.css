@@ -52,15 +52,22 @@ table {
 body {
     height: 100%;
     margin: 0.5rem;
-    padding: 0.2rem;
+    padding: 0.2rem; 
 	background-color: #001218;
 	line-height: 1rem;
 }
 
+#motherDiv{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 1rem;
+	width: 100%;
+}
 
 #navBar{
 	font-family: 'Oswald', sans-serif;
-	margin-left: 2rem;
+	width: 95%;
 }
 
 a{
@@ -71,6 +78,23 @@ a{
 	transition:0.5s;
 }
 
+#navBar > a:first-child {
+	background-color: rgba(161, 19, 31, 0.835);
+	font-size: 18px;
+	padding: 0.2rem 1rem;
+	border-radius: 3px;
+	border: none;
+	transition: none;
+
+}
+
+#navBar > a:first-child:hover {
+	box-shadow: 0px 0px 10px 1px rgba(161, 19, 31, 0.835);
+
+}
+
+
+
 a:hover{
 	border-color: blanchedalmond;
 }
@@ -79,7 +103,12 @@ a:hover{
 	display:flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	background-color: #2c4066;
+	background-color: #1a3f1a;
+	background-image: url(map.png);
+	background-repeat:no-repeat;
+	background-size: 60%;
+	background-position: left;
+	width:95%;
 	min-height: 37rem;
 	margin: 1rem 2rem 0 2rem;
 	padding:1rem;
@@ -87,8 +116,8 @@ a:hover{
 }
 
 iframe {
-	width:20rem;
-	height:20rem;
+	width:18rem;
+	height:18rem;
 	border-radius: 3px;
 	filter: brightness(90%);
 	box-shadow: 0px 0px 10px 1px #001218;
@@ -138,6 +167,7 @@ option:checked,option:active,option:focus,option:focus-visible,option:focus-with
 #mapDiv {
 	display: flex;
 	flex-direction: column;
+	margin-top: 2.5rem;
 }
 #statsDiv {
 	color:#d3d9e498;

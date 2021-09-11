@@ -23,7 +23,7 @@ const extractCountries = async () => {
             slctRegion.appendChild(option);
             frame.src = `https://www.google.com/maps/embed/v1/place?key=${myKey}&q=Iran&zoom=3`
         }
-        dateForChart();
+        dateForCharts();
     }
     catch {
         console.log('Error on extracting countries name')
@@ -33,11 +33,13 @@ const extractCountries = async () => {
 // "name" from "countryStats" for executing as query (country name)
 const chooseCountry = async (name) => {
     try {
-        const resD = await axios.get(`https://covid-api.mmediagroup.fr/v1/history?country=${name}&status=deaths`)
-        const history = resD.data.All;
-        const resC = await axios.get(`https://covid-api.mmediagroup.fr/v1/cases?country=${name}`)
+        const resDH = await axios.get(`https://covid-api.mmediagroup.fr/v1/history?country=${name}&status=deaths`);
+        const deathHistory = resDH.data.All;
+        const resCH = await axios.get(`https://covid-api.mmediagroup.fr/v1/history?country=${name}&status=confirmed`);
+        const confirmedHistory = resCH.data.All;
+        const resC = await axios.get(`https://covid-api.mmediagroup.fr/v1/cases?country=${name}`);
         const cases = resC.data.All;
-        return [history, cases]
+        return [deathHistory, cases, confirmedHistory]
     }
     catch {
         console.log("Error on loading statistics of chosen country")
@@ -47,7 +49,9 @@ const chooseCountry = async (name) => {
 //  "userSelectCountry" from "select listener" for passing throw "choose country"
 const countryStats = async (userSelectCountry) => {
     const stats = await chooseCountry(userSelectCountry);
-    const deathData = stats[0].dates;
+    const deathHistory = stats[0].dates;
+    const confirmedHistory = stats[2].dates;
+
     const confirmedTotal = stats[1].confirmed;
     const deathTotal = stats[1].deaths;
     const population = stats[1].population;
@@ -55,17 +59,27 @@ const countryStats = async (userSelectCountry) => {
     const lifeExpextancy = stats[1].life_expectancy;
 
 
-
-    const statList = Object.values(deathData);
-
+    const deathValueList = Object.values(deathHistory);
     const deathStat = [];
-
     for (let i = 0; i <= 365; i += 30) {
-        let stat = statList[i] - statList[i + 1]
+        let stat = deathValueList[i] - deathValueList[i + 1]
         deathStat.push(stat);
     }
 
-    updateChartData(deathStat);
+
+    const confirmedValueList = Object.values(confirmedHistory);
+    const confirmedStat = [];
+    for (let i = 0; i <= 365; i += 30) {
+        let stat = confirmedValueList[i] - confirmedValueList[i + 1]
+        confirmedStat.push(stat);
+    }
+    updateChartData(deathStat, confirmedStat);
+
+
+
+
+
+
     populationSpan.textContent = population;
     confirmedSpan.textContent = confirmedTotal;
     deathSpan.textContent = deathTotal;
@@ -76,12 +90,14 @@ const countryStats = async (userSelectCountry) => {
     &q=${userSelectCountry}`
 }
 
-const updateChartData = async (inputDeath) => {
+const updateChartData = async (inputDeath, inputConfirmed) => {
     myChart.data.datasets[0].data = inputDeath.reverse();
+    myChart2.data.datasets[0].data = inputConfirmed.reverse();
     myChart.update()
+    myChart2.update()
 }
 
-const dateForChart = function () {
+const dateForCharts = function () {
     const date = new Date();
     const thisMonth = date.getMonth();
     const monthsList = [];
@@ -92,7 +108,9 @@ const dateForChart = function () {
         monthsList.push(cleanDate)
     }
     myChart.data.labels = monthsList.reverse();
+    myChart2.data.labels = monthsList.reverse();
     myChart.update();
+    myChart2.update()
 }
 
 // Show countries in the "select slider"
