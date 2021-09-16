@@ -23,7 +23,7 @@ const extractCountries = async () => {
             slctRegion.appendChild(option);
             frame.src = `https://www.google.com/maps/embed/v1/place?key=${myKey}&q=Iran&zoom=3`
         }
-        dateForCharts();
+
     }
     catch {
         console.log('Error on extracting countries name')
@@ -48,7 +48,10 @@ const chooseCountry = async (name) => {
 
 //  "userSelectCountry" from "select listener" for passing throw "choose country"
 const countryStats = async (userSelectCountry) => {
+
     const stats = await chooseCountry(userSelectCountry);
+    const dates = dateForCharts();
+
     const deathHistory = stats[0].dates;
     const confirmedHistory = stats[2].dates;
 
@@ -58,27 +61,19 @@ const countryStats = async (userSelectCountry) => {
     const area = stats[1].sq_km_area;
     const lifeExpextancy = stats[1].life_expectancy;
 
-
-    const deathValueList = Object.values(deathHistory);
     const deathStat = [];
-    for (let i = 0; i <= 365; i += 30) {
-        let stat = deathValueList[i] - deathValueList[i + 1]
-        deathStat.push(stat);
+    for (let d of dates) {
+        const variance = deathHistory[d[0]] - deathHistory[d[1]];
+        deathStat.push(variance)
     }
 
-
-    const confirmedValueList = Object.values(confirmedHistory);
     const confirmedStat = [];
-    for (let i = 0; i <= 365; i += 30) {
-        let stat = confirmedValueList[i] - confirmedValueList[i + 1]
-        confirmedStat.push(stat);
+    for (let d of dates) {
+        const variance = confirmedHistory[d[0]] - confirmedHistory[d[1]];
+        confirmedStat.push(variance)
     }
+
     updateChartData(deathStat, confirmedStat);
-
-
-
-
-
 
     populationSpan.textContent = population;
     confirmedSpan.textContent = confirmedTotal;
@@ -91,26 +86,41 @@ const countryStats = async (userSelectCountry) => {
 }
 
 const updateChartData = async (inputDeath, inputConfirmed) => {
-    myChart.data.datasets[0].data = inputDeath.reverse();
-    myChart2.data.datasets[0].data = inputConfirmed.reverse();
+    myChart.data.datasets[0].data = inputDeath
+    myChart2.data.datasets[0].data = inputConfirmed
     myChart.update()
     myChart2.update()
 }
 
 const dateForCharts = function () {
-    const date = new Date();
-    const thisMonth = date.getMonth();
-    const monthsList = [];
+    let date = new Date();
+
+    const monthForChart = [];
+    const monthForApi = [];
     for (let i = 0; i <= 12; i++) {
+
+        const today = new Date();
+        const yesterday = new Date();
+
+        today.setDate(date.getDate() - 1);
+
+        const thisMonth = today.getMonth();
         const num = thisMonth - i;
-        date.setMonth(num);
-        const cleanDate = date.toISOString().slice(0, 10)
-        monthsList.push(cleanDate)
+        today.setMonth(num);
+        yesterday.setMonth(num)
+        yesterday.setDate(today.getDate() - 1);
+
+        const day1 = today.toISOString().slice(0, 10);
+        const day2 = yesterday.toISOString().slice(0, 10);
+        monthForChart.push(day1);
+        monthForApi.push([day1, day2])
     }
-    myChart.data.labels = monthsList.reverse();
-    myChart2.data.labels = monthsList.reverse();
+    monthForChart.reverse()
+    myChart.data.labels = monthForChart;
+    myChart2.data.labels = monthForChart;
     myChart.update();
-    myChart2.update()
+    myChart2.update();
+    return (monthForApi.reverse())
 }
 
 // Show countries in the "select slider"

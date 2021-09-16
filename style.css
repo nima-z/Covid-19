@@ -122,7 +122,9 @@ iframe {
 	filter: brightness(90%);
 	box-shadow: 0px 0px 10px 1px #001218;
 }
-
+/* #slctDiv {
+	width:100%;
+} */
 .form-select {
 	height:98%;
 	cursor:pointer;
@@ -168,6 +170,7 @@ option:checked,option:active,option:focus,option:focus-visible,option:focus-with
 	display: flex;
 	flex-direction: column;
 	margin-top: 2.5rem;
+	width:25%;
 }
 #statsDiv {
 	color:#d3d9e498;
@@ -186,3 +189,6 @@ option:checked,option:active,option:focus,option:focus-visible,option:focus-with
 	color: rgb(176, 63, 74);
 }
 
+.chart{
+	width:25%;
+}
