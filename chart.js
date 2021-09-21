@@ -1,4 +1,4 @@
-Chart.defaults.font.family = 'Oswald', 'sans serif';
+Chart.defaults.font.family = 'Roboto', 'sans serif';
 Chart.defaults.color = '#d3d9e498';
 
 const chartDeath = document.querySelector('#chartDeath').getContext('2d');

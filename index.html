@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+    </style>
     <link rel="stylesheet" href="style.css">
     <title>Covid 19</title>
 </head>
@@ -19,59 +22,62 @@
         </nav>
 
         <div id="mainDiv">
-
-
-
-
-            <div id="chartDiv" class="chart">
-                <canvas id="chartDeath" width="400" height="400"></canvas>
-            </div>
-
-            <div id="chartDiv2" class="chart">
-                <canvas id="chartConfirmed" width="400" height="400"></canvas>
-            </div>
-
-            <div id="mapDiv">
-                <iframe style="border:0" loading="lazy" allowfullscreen src=""></iframe>
-
-                <div id="statsDiv">
-
-                    <div id="areaDiv">
-                        <span>Area (sq_km):&nbsp</span>
-                        <span id="areaSpan" class="textStat"></span>
-                    </div>
-                    <div id="lifeExpectDiv">
-                        <span>Life Expectancy:&nbsp</span>
-                        <span id="lifeExpectSpan" class="textStat"></span>
-                    </div>
-                    <div id="populationDiv">
-                        <span>Population:&nbsp</span>
-                        <span id="populationSpan" class="textStat"></span>
+            <section id="sect-graph">
+                <div id="graph-div">
+                    <div id="mapDiv">
+                        <div id="chartDiv2" class="chart">
+                            <canvas id="chartConfirmed" width="400" height="400"></canvas>
+                        </div>
                     </div>
 
-                    <div id="confirmedDiv">
-                        <span>Total Confirmed Cases:&nbsp</span>
-                        <span id="confirmedSpan" class="textStat"></span>
-                    </div>
-
-                    <div id="deathDiv">
-                        <span>Total Death Cases:&nbsp</span>
-                        <span id="deathSpan" class="textStat"></span>
+                    <div id="mapchart">
+                        <div id="chartDiv" class="chart">
+                            <canvas id="chartDeath" width="400" height="400"></canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div>
+                    <div id="statsDiv">
+                        <div id="areaDiv" class="text_bot">
+                            <span>Area (sq_km):&nbsp</span>
+                            <span id="areaSpan" class="textStat"></span>
+                        </div>
+                        <!-- <div id="lifeExpectDiv" class="text_bot">
+                            <span>Life Expectancy:&nbsp</span>
+                            <span id="lifeExpectSpan" class="textStat"></span>
+                        </div> -->
+                        <div id="populationDiv" class="text_bot">
+                            <span>Population:&nbsp</span>
+                            <span id="populationSpan" class="textStat"></span>
+                        </div>
 
-            <div id="slctDiv">
-                <select class="form-select" id="slctRegion" multiple></select>
-            </div>
+                        <div id="confirmedDiv" class="text_bot">
+                            <span>Total Confirmed Cases:&nbsp</span>
+                            <span id="confirmedSpan" class="textStat"></span>
+                        </div>
 
+                        <div id="deathDiv" class="text_bot">
+                            <span>Total Death Cases:&nbsp</span>
+                            <span id="deathSpan" class="textStat"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div>
+                    <iframe style="border:0" loading="lazy" allowfullscreen src=""></iframe>
+
+                    <div id="slctDiv">
+
+                        <select class="form-select" id="slctRegion" multiple></select>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 
     <!-- Scripts Here -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
-    </style>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="chart.js"></script>
