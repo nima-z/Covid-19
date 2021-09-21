@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div id="motherDiv">
+    <div id="container-col">
 
         <nav id="navBar">
             <a href="">API Source</a>
@@ -21,56 +21,51 @@
             <a href="">About</a>
         </nav>
 
-        <div id="mainDiv">
-            <section id="sect-graph">
-                <div id="graph-div">
-                    <div id="mapDiv">
-                        <div id="chartDiv2" class="chart">
-                            <canvas id="chartConfirmed" width="400" height="400"></canvas>
-                        </div>
+        <div id="mainDiv-row">
+            <section id="sect-stats-col">
+                <div id="chart-div-row">
+
+                    <div id="chart1" class="chart">
+                        <canvas id="chartConfirmed" width="400" height="400"></canvas>
                     </div>
 
-                    <div id="mapchart">
-                        <div id="chartDiv" class="chart">
-                            <canvas id="chartDeath" width="400" height="400"></canvas>
-                        </div>
+                    <div id="chart2" class="chart">
+                        <canvas id="chartDeath" width="400" height="400"></canvas>
                     </div>
+
                 </div>
-                <div>
-                    <div id="statsDiv">
-                        <div id="areaDiv" class="text_bot">
-                            <span>Area (sq_km):&nbsp</span>
-                            <span id="areaSpan" class="textStat"></span>
-                        </div>
-                        <!-- <div id="lifeExpectDiv" class="text_bot">
-                            <span>Life Expectancy:&nbsp</span>
-                            <span id="lifeExpectSpan" class="textStat"></span>
-                        </div> -->
-                        <div id="populationDiv" class="text_bot">
-                            <span>Population:&nbsp</span>
-                            <span id="populationSpan" class="textStat"></span>
-                        </div>
+                <div id="stat-div-row">
 
-                        <div id="confirmedDiv" class="text_bot">
-                            <span>Total Confirmed Cases:&nbsp</span>
-                            <span id="confirmedSpan" class="textStat"></span>
-                        </div>
+                    <div id="areaDiv" class="text-info">
+                        <span>Area (sq_km):&nbsp</span>
+                        <span id="areaSpan" class="textStat"></span>
+                    </div>
 
-                        <div id="deathDiv" class="text_bot">
-                            <span>Total Death Cases:&nbsp</span>
-                            <span id="deathSpan" class="textStat"></span>
-                        </div>
+                    <div id="populationDiv" class="text-info">
+                        <span>Population:&nbsp</span>
+                        <span id="populationSpan" class="textStat"></span>
+                    </div>
+
+                    <div id="confirmedDiv" class="text-info">
+                        <span>Total Confirmed Cases:&nbsp</span>
+                        <span id="confirmedSpan" class="textStat"></span>
+                    </div>
+
+                    <div id="deathDiv" class="text-info">
+                        <span>Total Death Cases:&nbsp</span>
+                        <span id="deathSpan" class="textStat"></span>
                     </div>
                 </div>
             </section>
-            <section>
-                <div>
+            <section id="sect-countries">
+                <div id="mapAndList">
+
                     <iframe style="border:0" loading="lazy" allowfullscreen src=""></iframe>
 
                     <div id="slctDiv">
-
                         <select class="form-select" id="slctRegion" multiple></select>
                     </div>
+
                 </div>
             </section>
         </div>

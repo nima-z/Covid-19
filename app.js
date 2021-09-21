@@ -1,10 +1,8 @@
 const slctRegion = document.querySelector('#slctRegion');
-// const slctTime = document.querySelector('#slctTime');
 const populationSpan = document.querySelector('#populationDiv > #populationSpan');
 const confirmedSpan = document.querySelector('#confirmedDiv > #confirmedSpan');
 const deathSpan = document.querySelector('#deathDiv > #deathSpan');
 const areaSpan = document.querySelector('#areaDiv > #areaSpan');
-const lifeExpectSpan = document.querySelector('#lifeExpectDiv > #lifeExpectSpan');
 const frame = document.querySelector('iframe');
 const myKey = config.Api_key;
 
@@ -59,7 +57,6 @@ const countryStats = async (userSelectCountry) => {
     const deathTotal = stats[1].deaths;
     const population = stats[1].population;
     const area = stats[1].sq_km_area;
-    const lifeExpextancy = stats[1].life_expectancy;
 
     const deathStat = [];
     for (let d of dates) {
@@ -79,7 +76,6 @@ const countryStats = async (userSelectCountry) => {
     confirmedSpan.textContent = confirmedTotal;
     deathSpan.textContent = deathTotal;
     areaSpan.textContent = area;
-    lifeExpectSpan.textContent = lifeExpextancy;
 
     frame.src = `https://www.google.com/maps/embed/v1/place?key=${myKey}
     &q=${userSelectCountry}`
